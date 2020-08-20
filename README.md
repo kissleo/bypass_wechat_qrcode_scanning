@@ -41,12 +41,12 @@
 
 之后就可以抓包了，关于抓包，你可以使用fiddler，参考[这篇文章](https://github.com/wnma3mz/wechat_articles_spider/blob/master/docs/get_appmsg_token.md)，我使用的是burp，详细说一下过程。
 
-首先你要安装VirtualXposed，然后去微信的官网，下载一个微信的最新版本的apk，最好选择32位的，我安装64位一直失败。然后再VirtualXposed中安装apk。之后再去安装JustTrustMe就可以了。
+首先你要安装[VitualXposed](https://github.com/android-hacker/VirtualXposed)，然后去微信的官网，下载一个微信的最新版本的apk，最好选择32位的，我安装64位一直失败。然后再VirtualXposed中安装apk。之后再去安装[JustTrustMe](https://github.com/Fuzion24/JustTrustMe)就可以了。
 
-然后你需要把burp的证书导入到手机里面，在burp里面选择导入证书(export certificate)，然后修改后缀为.cer，传给手机后安装即可，网上可以找到大量教程。
+然后你需要把burp的证书导出并安装到手机里面，在burp里面选择导出证书(export certificate)，然后修改后缀为.cer，传给手机后安装即可，网上可以找到大量教程。
 
-之后，打开手机的wifi，开启代理，填你电脑的内网ip和burp的监听端口就可以了。记得先开启burp的监听再开启VitualXposed中的微信。之后你用微信正常扫码、确认登录，然后要拦截最后确认登录时候的数据包，在POST的内容里面就可以找到**appmsg_token**了。每次扫码登陆，**appmsg_token**都会变化，但是没事，你随便弄一个填写到脚本中，都是可以通过检验的。
+之后，打开手机的wifi--更多设置--开启代理，填你电脑的内网ip以及burp的监听端口就可以了。记得先开启burp的监听再开启VitualXposed中的微信。之后你输入账号和密码登陆自己的公众号，然后用微信扫描登陆公众号的二维码、开启burp的拦截，点击确认登录，（要拦截最后确认登录时候的数据包）。在POST的内容里面就可以找到**appmsg_token**了。每次扫码登陆，**appmsg_token**都会变化，但是没事，你随便弄一个填写到脚本中，都是可以通过检验的，一劳永逸。
 
 
 
-现在准备工作做好了，你只要把二维码的图片覆盖qrcode.png就可以了，或者直接用二维码的url，看源码就知道了。启动后就可以直接在电脑中，不再需要手机的扫码，就能成功登陆了。配合selenium食用更佳。
+现在准备工作做好了，当你需要在电脑模拟手机的扫码登陆时，你只要把二维码的图片覆盖qrcode.png就可以了，或者直接用二维码的url，看源码就知道了。启动后就可以直接在电脑中，不再需要手机的扫码，就能成功登陆了。配合selenium食用更佳。
