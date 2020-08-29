@@ -2,7 +2,6 @@
 绕过微信公众号、小程序的强制摄像头扫码登陆
 
 
-
 ## 产生缘由
 
 微信公众号（小程序）的扫码登陆机制是在过于讨厌。一方面自作主张强制进行“二维码登陆保护”，且不能关闭这种“保护”。另一方面，不允许长按扫码或者从相册中选择图片扫码登陆，强制要求通过摄像头扫码登陆。
@@ -16,23 +15,39 @@
 ### 我要的是一个不用通过手机扫码，单纯在电脑中就能自己伪造扫码过程进行登录的脚本。
 
 ## 使用方法
+
 使用方法就是，将脚本中这几行的数据填写为你自己的数据：
 
 ```python
-    appmsg_token = 'xxxxxxxxx'
-    pass_ticket = 'xxxxxxxx'
-    wap_sid2 = 'xxxxxxxx'
-    user_agent = 'xxxxxxxxx'
-    wxuin = 'xxxxxxxx'
-    ua_id = 'xxxxxxxxx'
-    pgv_pvi = 'xxxxxxxxx'
-    pgv_si = 'xxxxxxxxxx'
-    uuid = 'xxxxxxxxxx'
+    pass_ticket = 'xxxxxxx'
+    wap_sid2 = 'xxxxxx'
+    user_agent = 'xxxxxx'
+    wxuin = 'xxxxxx'
+    ua_id = 'xxxxxx'
+    pgv_pvi = 'xxxxxxx'
+    pgv_si = 'xxxxxx'
+    uuid = 'xxxxxxx'
 ```
 
 其中user_agent指的是微信内置浏览器的UA，你可以用微信的内置浏览器去访问一些能显示自己UA的在线工具，然后就能得到。
 
-其他的几个，除了appmsg_token之外，都是cookies。可以在登录微信公众号或者小程序后，按f12在开发者工具中找到这几个cookies对应的值（只要填一次就好，一劳永逸）。
+其他的几个都是cookies，可以在登录微信公众号或者小程序后，按f12在开发者工具中找到这几个cookies对应的值（只要填一次就好，一劳永逸）。
+
+
+
+### 除了wap_sid2之外，其他都是一劳永逸，不用改的。剩下一个wap_sid2，过差不多一天就会过期。在wap_sid2过期之前，你可以免扫码登陆。但是当他过期之后，你就需要再登陆一起获取wap_sid2。
+
+
+
+### 所以这个项目无法实现永久的免扫码登陆，只能实现“扫码登陆一次后，一段时间内可以免扫码登陆”。有兴趣的大佬可以看看能不能通过hook的方式获取微信内置浏览器的wap_sid2，这样的话就能实现真正的“永久免扫码登陆”。
+
+
+
+
+
+# 请忽略下面的一切，现在已经不用appmsg_token了，爬虫自己会获取
+
+
 
 #### 最后剩下一个appmsg_token的获取方式，就比较复杂，需要对微信进行抓包得到。
 本来抓包也不难，可是微信自带了对证书的检验，所以微信看到抓包的自签名证书就直接断开连接了，正常情况下无法解密https的流量。
