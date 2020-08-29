@@ -32,7 +32,7 @@ def scan_qrcode():
 
     # 解析二维码，获取二维码的qrticket
     try:
-        a = get_ewm(r'登陆扫的二维码的本地路径').split('&')[-1]
+        a = get_ewm(r'qrcode.png').split('&')[-1]
     except:
         return
 
